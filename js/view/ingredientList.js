@@ -1,1 +1,61 @@
-var IngredientList = function (container, model) {		/**	 * We use the @method find() on @var {jQuery object} container to look for various elements 	 * inside the view in orther to use them later on. For instance:	 * 	 * @var {jQuery object} numberOfGuests is a reference to the <span> element that 	 * represents the placeholder for where we want to show the number of guests. It's	 * a reference to HTML element (wrapped in jQuery object for added benefit of jQuery methods)	 * and we can use it to modify <span>, for example to populate it with dynamic data (for now 	 * only 'Hello world', but you should change this by end of Lab 1).	 * 	 * We use variables when we want to make the reference private (only available within) the	 * ExampleView.	 * 	 * IMPORTANT: Never use $('someSelector') directly in the views. Always use container.find	 * or some other way of searching only among the containers child elements. In this way you	 * make your view code modular and ensure it dosn't break if by mistake somebody else	 * in some other view gives the same ID to another element.	 * 	 */	var ingredientlist = container.find("#inlist");	//var numberOfGuests = container.find("#numberOfGuests");	//var createNewPlanBtn = container.find("#createNewPlanBtn");	/**	 * When we want references to some view elements to be available from outside of view, we 	 * define them as this.someName. We don't need this in Lab 1 yet, but in Lab 2 it 	 * will be important for assigning listeners to these buttons, because the listeners	 * should not be assigned in the view, but rather in controller.	 * 	 * We can then, in some other code, use exampleView.plusButton to reference the 	 * this button and do something with it (see Lab 2).	 * 	 */	//this.plusButton = container.find("#plusGuest");	//this.minusButton = container.find("#minusGuest");				/**	 * Here we use @var {jQuery object} numberOfGuests that is a reference to <span>	 * in our view to dynamically set it's value to "Hello World".	 */		html='';			var menu = model.getOneDish();	const menulength = menu.length;	html +='<table class = "wholetable">'+'<tr class = "tablehead"><td colspan="3">'+"Ingredients for "+ model.getNumberOfGuests() + " People"+'</td></tr>'	//menu.forEach(function())	for(let i = 0; i < menu[0].ingredients.length; i++){		/*create table*/							html += '<tr><td>'+menu[0].ingredients[i].quantity * model.getNumberOfGuests() + menu[0].ingredients[i].unit+'</td>';		html += '<td>'+menu[0].ingredients[i].name+'</td>';		html += '<td>'+menu[0].ingredients[i].price * model.getNumberOfGuests()+'</tr>';	}	footer = '<tr><td colspan="2"><button class="btn2">Add to Menu</button></td>'	footer += '<td>Cost:'+model.getTotalMenuPrice()+'</td></tr></table>'		ingredientlist.html(html+footer);	} 
+
+var IngredientList = function (container, model) {
+
+	this.addToMenuBtn = container.find("#addToMenuBtn");
+
+	this.hide = function(){
+		container.hide();
+	}
+	
+	this.show = function(){
+		container.show();
+	}
+	
+	var ingredientlist = container.find("#inlist");
+	var guestnumber = container.find("#guestnumber");
+	//this.addToMenuBtn;
+	var totalprice = container.find("#totalprice");
+
+this.update = function(){	
+
+	html1='';
+	html2='';
+	
+	
+	var onedish = model.onedish;
+
+	if(onedish){
+
+		console.log("onedish");
+		console.log(onedish);
+	
+ 
+		html1 += '<td colspan="3">'+"Ingredients for "+ model.getNumberOfGuests() + " People"+'</td>'
+		
+		for(let i = 0; i < onedish.ingredients.length; i++){
+		/*create table*/
+
+			html2 += '<tr><td>'+onedish.ingredients[i].quantity * model.getNumberOfGuests() + onedish.ingredients[i].unit+'</td>';
+			html2 += '<td>'+onedish.ingredients[i].name+'</td>';
+			html2 += '<td>'+onedish.ingredients[i].price * model.getNumberOfGuests()+'</td></tr>';
+		}
+		footer = ''
+		footer += 'Cost:'+model.getTotalMenuPrice()
+	
+		guestnumber.html(html1);
+		ingredientlist.html(html2);
+		totalprice.html(footer);
+		
+
+	}
+	
+	
+	
+}
+	
+//this.update();
+model.addObserver(this);
+	
+	
+}
+ 

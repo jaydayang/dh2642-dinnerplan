@@ -1,1 +1,20 @@
-var WelcomeView = function (container, model) {		var welcomeContext = container.find("#welcomeContext");	var createNewPlanBtn = container.find("#createNewPlanBtn");		this.plusButton = container.find("#plusGuest");	this.minusButton = container.find("#minusGuest");		createNewPlanBtn.html("Create New Plan");	welcomeContext.html("Your assignment in this lab is to implement the layout of the this prototype (Links to an external site.)Links to an external site. and extend the model to fit the needs of the application. The prototype is for a Dinner Planning application. Imagine you have some guests over and you want to plan what to cook. Simple as that.");	} 
+
+var WelcomeView = function (container, model) {
+	
+
+
+	var welcomeContext = container.find("#welcomeContext");
+	this.createNewPlanBtn = container.find("#createNewPlanBtn");
+
+	this.hide = function(){
+		container.hide();
+	}
+	
+	this.show = function(){
+		container.show();
+	}
+	
+	welcomeContext.html("Welcome to Dinner Plan!");
+	
+}
+ 

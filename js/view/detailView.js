@@ -1,1 +1,42 @@
-var DetailView = function (container, model) {		/**	 * We use the @method find() on @var {jQuery object} container to look for various elements 	 * inside the view in orther to use them later on. For instance:	 * 	 * @var {jQuery object} numberOfGuests is a reference to the <span> element that 	 * represents the placeholder for where we want to show the number of guests. It's	 * a reference to HTML element (wrapped in jQuery object for added benefit of jQuery methods)	 * and we can use it to modify <span>, for example to populate it with dynamic data (for now 	 * only 'Hello world', but you should change this by end of Lab 1).	 * 	 * We use variables when we want to make the reference private (only available within) the	 * ExampleView.	 * 	 * IMPORTANT: Never use $('someSelector') directly in the views. Always use container.find	 * or some other way of searching only among the containers child elements. In this way you	 * make your view code modular and ensure it dosn't break if by mistake somebody else	 * in some other view gives the same ID to another element.	 * 	 */	var detailview = container.find("#detail");	//var numberOfGuests = container.find("#numberOfGuests");	//var createNewPlanBtn = container.find("#createNewPlanBtn");	/**	 * When we want references to some view elements to be available from outside of view, we 	 * define them as this.someName. We don't need this in Lab 1 yet, but in Lab 2 it 	 * will be important for assigning listeners to these buttons, because the listeners	 * should not be assigned in the view, but rather in controller.	 * 	 * We can then, in some other code, use exampleView.plusButton to reference the 	 * this button and do something with it (see Lab 2).	 * 	 */	//this.plusButton = container.find("#plusGuest");	//this.minusButton = container.find("#minusGuest");				/**	 * Here we use @var {jQuery object} numberOfGuests that is a reference to <span>	 * in our view to dynamically set it's value to "Hello World".	 */			/*	menu.forEach(function(value, index, array){		var Name = value.name;		html += '<div>' + value.name +'</div>';				console.log(value.name);		dishName.html(Name);	})	*/	var menu = model.getOneDish();	const menulength = menu.length;	console.log("lenth"+menu.length);	html='';	html +='<div class="row ">' + '<p class = "h4">' + menu[0].name + '</p></div>';	html +='<div class="row">'+'<img src="images/' + menu[0].image + '"'+'class = "bigpic">' + '</div>';	html +='<div class="row"><p>'+ menu[0].description +'</p></div>';	html +='<div class="left"><button class="btn2">back to search</button></div>'	html +='<div class="row ">' + '<p class = "h4">' + "Preperation" + '</p></div>';	html +='<div class="row"><p>'+ menu[0].description +'</p></div>';		//menu.forEach(function())		detailview.html(html);	//html += '<div style="display:inline;">' + dishes[i].name + '</div>';		//createNewPlanBtn.html("Create New Plan");	//welcomeContext.html("ashdfjaljsdhfalksdjhfalskdfh");	} 
+
+var DetailView = function (container, model) {
+	var detailview1 = container.find("#detail1");
+	var detailview2 = container.find("#detail2");
+	this.backBtn = container.find("#backBtn");
+
+    
+	this.update = function(){
+		
+		var onedish = model.onedish;
+
+	if(onedish){
+
+		html1='';
+		html1 +='<div class="row ">' + '<p class = "h4">' + onedish.name + '</p></div>';
+		html1 +='<div class="row">'+'<img src="images/' + onedish.image + '"'+'class = "bigpic">' + '</div>';
+		html1 +='<div class="row"><p>'+ onedish.description +'</p></div>';
+		detailview1.html(html1);
+		
+		html2='';
+		html2 +='<div class="row ">' + '<p class = "h4">' + "Preperation" + '</p></div>';
+		html2 +='<div class="row"><p>'+ onedish.description +'</p></div>';
+	
+		detailview2.html(html2);
+		}
+		
+	}
+
+	//this.update();
+
+	model.addObserver(this);
+
+	this.hide = function(){
+		container.hide();
+	}
+
+	this.show = function(){
+		container.show();
+	}
+	
+}
+ 

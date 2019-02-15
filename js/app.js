@@ -1,1 +1,85 @@
-$(function() {	//We instantiate our model	var model = new DinnerModel();		// And create the instance of ExampleView	var welcomeView = new WelcomeView($("#welcomeView"), model);		var sidebarView = new SidebarView($("#sidebarView"), model);	var dishsearchView = new DishsearchView($("#dishsearchView"), model);	var dinnerView = new DinnerView($("#dinnerView"),model);	    var ingredientList = new IngredientList($("#ingredientList"),model);    var printOut = new PrintOut($("#printOut"),model);	var printOut = new DetailView($("#detailView"),model);	/**	 * IMPORTANT: app.js is the only place where you are allowed to	 * use the $('someSelector') to search for elements in the whole HTML.	 * In other places you should limit the search only to the children 	 * of the specific view you're working with (see exampleView.js).	 */		/*	$(".plusGuest").click(function(){ 			var add = $(this).siblings(".numberOfGuests"); 			add.val(parseInt(add.val())+1) 			addRoom();		}); 		*/			/*单击减号按钮减少房间*/	/*	$(".minusGuest").click(function(){ 			var min = $(this).siblings(".numberOfGuests"); 			min.val(parseInt(min.val())-1) 			if(parseInt(min.val())<1){ 				min.val(1);			}});						*/	var welcomeViewController = new WelcomeViewController(welcomeView, model);	var sidebarViewController = new SidebarViewController(sidebarView, model);});
+$(function() {
+	//We instantiate our model
+	var model = new DinnerModel();
+	
+	// And create the instance of ExampleView
+	var welcomeView = new WelcomeView($("#welcomeView"), model);
+	
+	var sidebarView = new SidebarView($("#sidebarView"), model);
+	var dishsearchView = new DishsearchView($("#dishsearchView"), model);
+	var dishitemView = new DishitemView($("#dishitemView"), model);
+	var dinnerView = new DinnerView($("#dinnerView"),model);
+	
+    var ingredientList = new IngredientList($("#ingredientList"),model);
+    var printOut = new PrintOut($("#printOut"),model);
+	var detailView = new DetailView($("#detailView"),model);
+	var headbarView = new HeadbarView($("#headbarView"),model);
+
+    
+    //var initViewController = new InitViewController();
+
+	var welcomeViewController = new WelcomeViewController(welcomeView, model,this);
+	var sidebarViewController = new SidebarViewController(sidebarView, model,this);
+	
+	var ingredientViewController = new IngredientViewController(ingredientList, model,this);
+	var dinnerViewController = new DinnerViewController(dinnerView, model,this);
+	var headbarViewController = new HeadbarViewController(headbarView, model,this);
+	var dishsearchViewController = new DishsearchViewController(dishsearchView,model,this);
+	var detailViewController = new DetailViewController(detailView, model, this);
+
+
+
+	
+	
+
+	
+		
+		$('#detailView').hide();
+		$('#dinnerView').hide();
+		$('#dishitemView').hide();
+		$('#dishsearchView').hide();
+		$('#headbarView').hide();
+		$('#ingredientList').hide();
+		$('#printOut').hide();
+		$('#sidebarView').hide();
+	
+
+	this.jumpTo = function(showingView){
+		$('#detailView').hide();
+		$('#dinnerView').hide();
+		$('#dishitemView').hide();
+		$('#dishsearchView').hide();
+		$('#headbarView').hide();
+		$('#ingredientList').hide();
+		$('#printOut').hide();
+		$('#sidebarView').hide();
+		$('#welcomeView').hide();
+
+
+		switch(showingView){
+			case "DishSearchView":
+			$('#sidebarView').show();
+			$('#dishsearchView').show();
+				break;
+
+			
+
+			case "DinnerView":
+			$('#dinnerView').show();
+			$('#headbarView').show();
+			break;
+
+			case "PrintOutView":
+			$('#printOut').show();
+			$('#headbarView').show();
+			break;
+
+			case "DetailView":
+			$('#sidebarView').show();
+			$("#detailView").show();
+ 	        $("#ingredientList").show();
+		}
+	}
+
+
+});

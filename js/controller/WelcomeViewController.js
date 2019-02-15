@@ -1,8 +1,12 @@
 // JavaScript Document
 
-var WelcomeViewController = function (view, model){
+var WelcomeViewController = function (view, model,app){
+	
 	view.createNewPlanBtn.on('click', function(event){
-		view.hide();
+		
+		app.jumpTo("DishSearchView");
+		//view.style.display = 'none';
+		//view.contianer.hide();
 	})
 	
 }
