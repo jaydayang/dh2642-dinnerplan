@@ -6,23 +6,42 @@ var DetailView = function (container, model) {
 
     
 	this.update = function(){
+		//model.targetId
+		console.log("targetId agin"+model.targetId);
+		var iid = model.targetId;
+		model.getDish(iid).then(dish => {
+			console.log("targetId agintyeer"+iid);
+			this.onedish = dish;
+			
+			this.renderFetchedData(this.onedish);
 		
-		var onedish = model.onedish;
-
-	if(onedish){
-
-		html1='';
-		html1 +='<div class="row ">' + '<p class = "h4">' + onedish.name + '</p></div>';
-		html1 +='<div class="row">'+'<img src="images/' + onedish.image + '"'+'class = "bigpic">' + '</div>';
-		html1 +='<div class="row"><p>'+ onedish.description +'</p></div>';
-		detailview1.html(html1);
+			
 		
-		html2='';
-		html2 +='<div class="row ">' + '<p class = "h4">' + "Preperation" + '</p></div>';
-		html2 +='<div class="row"><p>'+ onedish.description +'</p></div>';
+			
+		})
+
+		this.renderFetchedData = function(onedish){
+			
+				console.log("yujieyangshishabi");
+				//console.log(onedish);
+
+			html1='';
+			html1 +='<div class="row ">' + '<p class = "h4">' + onedish.name + '</p></div>';
+			html1 +='<div class="row">'+'<img src="' + onedish.image+ '"'+'class = "bigpic">' + '</div>';
+			//describtion
+			html1 +='<div class="row"><p>'+ onedish.originalString +'</p></div>';
+			detailview1.html(html1);
+		
+			html2='';
+			html2 +='<div class="row ">' + '<p class = "h4">' + "Preperation" + '</p></div>';
+			//preparation
+			html2 +='<div class="row"><p>'+ onedish.originalString +'</p></div>';
 	
-		detailview2.html(html2);
+			detailview2.html(html2);
+			
+
 		}
+	
 		
 	}
 

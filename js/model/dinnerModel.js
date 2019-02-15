@@ -9,9 +9,9 @@ var DinnerModel = function() {
 	//TODO Lab 1 implement the data structure that will hold number of guest
 	// and selected dishes for the dinner menu
 	var guestnumbers = 0;
+	this.targetId;
 
-
- 	var observers=[];
+   	var observers=[];
 	this.selecteddish = [];
   
     this.addObserver=function(observer){ 
@@ -57,7 +57,7 @@ var DinnerModel = function() {
 	
 	this.getNumberOfGuests = function() {
 		//TODO Lab 1
-		console.log(guestnumbers);
+		//console.log(guestnumbers);
 		return guestnumbers;
 
 		
@@ -69,11 +69,14 @@ var DinnerModel = function() {
 		//var selecteddish = new Array();
 		//var typ="dessert";
 		//console.log("typeeeeesda"+type);
-		this.selecteddish = this.getAllDishes(type,filter);
+		this.getAllDishes(type,filter).then(dish =>{
+			
+			this.selecteddish = dish;
+		
 		
 		console.log("selected");
 		console.log(this.selecteddish);
-
+		});
 		this.notifyObservers();
 		return this.selecteddish;
 		
@@ -100,7 +103,7 @@ var DinnerModel = function() {
 		var allingredients = new Array();
 		this.getFullMenu().forEach(function(value,index,array){
 			
-			allingredients.push(value.ingredients);
+			allingredients.push(value.extendedIngredients);
 		})
 
 		return allingredients;
@@ -111,7 +114,7 @@ var DinnerModel = function() {
 	this.getEachMenuPrice = function(index){
 		var price0 = 0;
 		this.getAllIngredients()[index].forEach(function(value, index, array){
-			price0 += value.price;						 
+			price0 += 1;						 
 		})
 		return price0;
 		
@@ -124,11 +127,14 @@ var DinnerModel = function() {
 		var price2 = 0;
 		this.getAllIngredients().forEach(function(value, index, array){
 			var price1 = 0;
-			value.forEach(function(value, index, array){
-				price1 += value.price;
+			//value.forEach(function(value, index, array){
+				//price1 += 1;
 			    //console.log(value.price);
-			})
-			price2 += price1;
+			//})
+			
+			//price2 += price1;
+			price2+=1;
+
 		})
 		
 		var totalprice = price2 *this.getNumberOfGuests();
@@ -169,52 +175,41 @@ var DinnerModel = function() {
 	//if you don't pass any filter all the dishes will be returned
 	this.getAllDishes = function (type,filter) {
 		//console.log("dishesssx"+dishes);
-	  return dishes.filter(function(dish) {
-	  	
-		var found = true;
-
-		if(filter){
-			found = false;
-			dish.ingredients.forEach(function(ingredient) {
-				if(ingredient.name.indexOf(filter)!=-1) {
-					found = true;
-				}
-			});
-			if(dish.name.indexOf(filter) != -1)
-			{
-				found = true;
-			}
-		}
-		//if type!="" and if filter == "",then return all the dishes in selected type; 
-		//if type!=" and if filter != "", then return the specific dish(which has been found) in selected type
-		if(type){
-			return dish.type == type && found;
-	  	}else{
-	  		//if type=="" and filter == "", then return all the dish;
-	  		//if type=="" and filter != "", then return the dish which has been found in the whole dishes list
-	  		return found;
-	  	}
-	  	
-	  });	
-
+	    //return fetch("http://sunset.nada.kth.se:8080/iprog/group/14/recipes/search?query=burger&type=main+course",{
+	    	return fetch("http://sunset.nada.kth.se:8080/iprog/group/14/recipes/searchComplex?query="+filter+"&type="+type,{
+	    		headers:{   
+		            'X-Mashape-Key': "3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767"
+ 			}
+ 		}).then(response =>response.json())
+ 		.then(dish => dish.results);
 	}
 
 
-   this.onedish;
-	//function that returns a dish of specific ID
 	this.onedish;
  //function that returns a dish of specific ID
  this.getDish = function (id) {
-   for(key in dishes){
-   if(dishes[key].id == id) {
-    return dishes[key];
-   }
-  } 
+   //this.currentId=479101;
+ 	return fetch("http://sunset.nada.kth.se:8080/iprog/group/14/recipes/" + id +"/information",{
+ 		headers:{   
+		            'X-Mashape-Key': "3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767"
+ 	}
+ 	})
+ 	.then(response =>response.json())
+ 	//.then(dish => dish.results);
  }
 
  this.setDish = function(id){
-  this.onedish = this.getDish(id);;
-  this.notifyObservers();
+    this.getDish(id);;
+    this.notifyObservers();
+ }
+ this.setTargetId = function(id){
+ 	//this.targetId
+ 	this.targetId=id;
+ 	console.log("herterteterterterte"+this.targetId);
+ 
+
+ 	//notifyObservers();
+
  }
 
 
@@ -474,30 +469,6 @@ var DinnerModel = function() {
 var y = new DinnerModel();
 
 
-y.addDishToMenu(2);
-y.addDishToMenu(1);
-var a = y.getFullMenu();
-console.log('add');
-console.log(a);
-selecteddish = y.getSelectedDish("","");
-
-
-
-//console.log('delete');
-//y.removeDishFromMenu(2);
-//y.removeDishFromMenu(1);
-var b = y.getFullMenu().length;
-console.log(b);
-
-var d = y.getAllDishes("");
-console.log(d);
-//var d = y.getAllDishes('starter','');
-
-//var c = y.getSelectedDish('starter');
-//y.getFullMenu();
-y.getAllIngredients();
-var e = y.getTotalMenuPrice();
-console.log(e);
 
 
 

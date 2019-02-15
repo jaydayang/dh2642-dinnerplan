@@ -22,39 +22,54 @@ this.update = function(){
 	html2='';
 	
 	
-	var onedish = model.onedish;
+	//var onedish = model.getDish();
 
-	if(onedish){
+	if(model.getDish(model.targetId)){
 
-		console.log("onedish");
-		console.log(onedish);
-	
- 
-		html1 += '<td colspan="3">'+"Ingredients for "+ model.getNumberOfGuests() + " People"+'</td>'
+		//console.log("onedish");
+		//console.log(model.getDish(model.targetId));
+	    
+	    model.getDish(model.targetId).then(dish =>{
+	    	this.onedish = dish;
+	    	this.renderFetchedData(this.onedish);
+
+	    })
+
+	    this.renderFetchedData = function(onedish){
+
+	    	html1 += '<td colspan="3">'+"Ingredients for "+ model.getNumberOfGuests() + " People"+'</td>'
+	  
 		
-		for(let i = 0; i < onedish.ingredients.length; i++){
+		//for(let i = 0; i < model.getDish().extendedIngredients.length; i++){
 		/*create table*/
 
-			html2 += '<tr><td>'+onedish.ingredients[i].quantity * model.getNumberOfGuests() + onedish.ingredients[i].unit+'</td>';
-			html2 += '<td>'+onedish.ingredients[i].name+'</td>';
-			html2 += '<td>'+onedish.ingredients[i].price * model.getNumberOfGuests()+'</td></tr>';
-		}
-		footer = ''
-		footer += 'Cost:'+model.getTotalMenuPrice()
-	
-		guestnumber.html(html1);
-		ingredientlist.html(html2);
-		totalprice.html(footer);
-		
+			onedish.extendedIngredients.forEach(function(ingredient){
 
-	}
+				html2 += '<tr id="'+onedish.id+'"><td>'+ingredient.amount * model.getNumberOfGuests() + ingredient.unit+'</td>';
+				html2 += '<td>'+ingredient.name+'</td>';
+				html2 += '<td>'+ 1 * model.getNumberOfGuests()+'</td></tr>';
+				html2 += '<td>'+ ingredient.originalString+'</td>';
+
+			})
+			
+			footer = ''
+			footer += 'Cost:'+model.getTotalMenuPrice();
 	
+			guestnumber.html(html1);
+			ingredientlist.html(html2);
+			totalprice.html(footer);
+
+	    }
+ 
+	
+	}
 	
 	
 }
 	
 //this.update();
 model.addObserver(this);
+
 	
 	
 }

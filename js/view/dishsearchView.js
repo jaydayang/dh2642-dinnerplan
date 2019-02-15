@@ -15,19 +15,37 @@ var DishsearchView = function (container, model, app) {
 		this.text = container.find("#selectText").val();
 		
     	this.type = selectType[selectType.selectedIndex].value;
+
+    	model.getAllDishes(this.type,this.text).then(dish =>{
+    		this.dishlist = dish;
+    		if(dish){
+    			this.renderFetchedData(this.dishlist);
+    		}
+    		
+    	})
 		
+
+
 		var content = '';
-		
-		var dishlist = model.getAllDishes(this.type,this.text);
-		//dishlist.length
-		
-        dishlist.forEach(function(dish){
+		this.renderFetchedData=function(dishlist){
+
+			dishlist.forEach(function(dish){
+				//console.log("shdjflasjdfh");
+				//console.log(dish);
 
 			var dishitemview = new DishitemView(container, model, dish);
+			console.log("dish.id"+dish.id);
 			content += '<div class="col-md-3 col-sm-6 col-xs-12 ">'+'<div id="' + dish.id + '"'+' class="meal">' +dishitemview.getdishcontent()+'</div></div>';
 		})
 		this.dishdisplay.html(content);		
 		console.log("haha"+dishlist);
+
+		}
+		
+
+		//dishlist.length
+		
+        
 	}
 
 	this.hide = function(){

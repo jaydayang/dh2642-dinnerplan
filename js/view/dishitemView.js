@@ -12,9 +12,9 @@ var DishitemView = function (container, model, dish) {
 		
 		//content += '<div class="col-md-3 col-sm-6 col-xs-12">';
 		//content += '<div class="meal"';
-		content += '<img src="images/'+dish.image + '" class="imagegroup">';
-		content += '<div class= "block">'+ dish.name + '</div>';
-		console.log("dissssssssh"+dish.name);
+		content += '<img src="'+dish.image + '" class="imagegroup">';
+		content += '<div class= "block">'+ dish.title + '</div>';
+		console.log("dissssssssh"+dish.title);
 		
 		return content;
 	}
