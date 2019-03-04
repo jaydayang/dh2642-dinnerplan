@@ -12,7 +12,8 @@ var SidebarView = function (container, model) {
 	
 
      
-	this.update = function(){
+	this.update = function(datachange){
+		if(datachange=="guestChanged"||datachange=="menuChanged"){
 		html='';
 		front = `<table class="wholetable2"><tr><td>Dish</td><td>Cost</td>`;
 	
@@ -23,7 +24,7 @@ var SidebarView = function (container, model) {
 		
 			for(let i = 0; i < menulength; i++){
 	
-				html += '<tr><td>'+menu[i].name+'</td>';
+				html += '<tr><td>'+menu[i].title+'</td>';
 				html += '<td>'+model.getEachMenuPrice(i)+'</tr>';
 			}
 
@@ -34,6 +35,7 @@ var SidebarView = function (container, model) {
 			
 			
 		}
+	}
 		
 	}
 	
@@ -48,7 +50,7 @@ var SidebarView = function (container, model) {
 	}
 
 	// initialization
-	this.update();
+	this.update("guestChanged");
 	this.update1 = function(){
 		
 	}

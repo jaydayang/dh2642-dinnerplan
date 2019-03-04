@@ -27,9 +27,18 @@ var PrintOut = function (container, model) {
 		
 		
 			
-		html += '<div class="col-md-12 col-sm-12 col-xs-12">'+'<div class="col-md-3 col-sm-3 col-xs-12">'+ '<img src = "images/' + menu[i].image  +'" '+'class = "img-responsive">'+'</div>';
-		html +='<div class="col-md-3 col-sm-3 col-xs-12">' + '<p class="h4">' + menu[i].name + '</p>'  + '<p>' + menu[i].description + '</p>'+'</div>';
-		html +='<div class="col-md-6 col-sm-6 col-xs-12">' +'<p class="h4">' + 'Preperation' + '</p>' + '<p>' + menu[i].description + '</p>' + '</div>' + '</div>'
+		html += '<div class="col-md-12 col-sm-12 col-xs-12">'+'<div class="col-md-3 col-sm-3 col-xs-12">'+ '<img src = "' + menu[i].image  +'" '+'class = "img-responsive">'+'</div>';
+		html +=
+        '<div class="col-md-3 col-sm-3 col-xs-12">' +
+        '<p class="h4">' +
+        menu[i].title +
+        "</p >" +
+        "<p>" +
+        menu[i].instructions +
+        "</p >" +
+        "</div>";
+		//html +='<div class="col-md-3 col-sm-3 col-xs-12">' + '<p class="h4">' + menu[i].name + '</p>'  + '<p>' + menu[i].instructions + '</p>'+'</div>';
+		html +='<div class="col-md-6 col-sm-6 col-xs-12">' +'<p class="h4">' + 'Preperation' + '</p>' + '<p>' + menu[i].instructions + '</p>' + '</div>' + '</div>'
 	}
 	
 	printlist.html(html);

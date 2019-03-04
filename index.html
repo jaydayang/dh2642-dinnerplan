@@ -121,10 +121,20 @@
 					<div>
 						<input id="selectText" type="text" placeholder="Search">
 						<select id="selectType" placeholder="All">
-							<option value="">All</option>
-							<option value="main dish">Main course</option>
-							<option value="dessert">Dessert</option>
-							<option value="starter">Starter</option>
+						<option value="" selected>All</option>
+						<option value="starter">Starter</option>
+						<option value="main dish">Main Dish</option>
+						<option value="dessert">Dessert</option>
+						<option value="main course">Main Course</option>
+						<option value="side dish">Side Dish</option>
+						<option value="appetizer">Appetizer</option>
+						<option value="salad">Salad</option>
+						<option value="bread">Bread</option>
+						<option value="breakfast">Breakfast</option>
+						<option value="soup">Soup</option>
+						<option value="beverage">Beverage</option>
+						<option value="sauce">Sauce</option>
+						<option value="drink">Drink</option>
 						</select>
 						<button id="searchBtn" class="btn2" value="Search">Search</button>
 						
@@ -141,19 +151,18 @@
 <!------------------------------------------Detail View----------------------------------------------->
 
 		<div class="col-md-8 col-sm-8 col-xs-12">
-		    <div class="col-md-6 col-sm-6 col-xs-12">
+		   
 				<div id = "detailView">
-
-					<span id = "detail1"></span>
-					<div class="left"><button id="backBtn" class="btn2">back to search</button></div>
-					<span id = "detail2"></span>
-
-					</div>
-			</div>
+					
+					<div id="detail" class="col-md-6 col-sm-6 col-xs-12">
+						<span id = "detail1"></span>
+						<div class="left"><button id="backBtn" class="btn2">back to search</button></div>
+						<span id = "detail2"></span>
+				    </div>
 			
 			<div class="col-md-6 col-sm-6 col-xs-12">
 				<row class="largen">
-				<div id = "ingredientList">
+				
 					<table class = "wholetable">
 				  
 						<tr id="guestnumber" class = "tablehead"></tr>
@@ -166,9 +175,12 @@
 						</tr>
 			
 					</table>
+					</row>
 				</div>
-				</row>
+			
+				
 			</div>
+		</div>
 	
 		</div>
 
@@ -246,7 +258,7 @@
 	<script src="js/view/headbarView.js"></script>
 	<div id= "ingredientList"></div>
 
-	<script src="js/view/ingredientList.js"></script>
+
 	<script src="js/view/printOut.js"></script>
 	  
 	<!-- The application JavaScript code -->
@@ -260,7 +272,7 @@
 
 	<script src="js/controller/WelcomeViewController.js"></script>
 	<script src="js/controller/SidebarViewController.js"></script>
-	<script src="js/controller/IngredientViewController.js"></script>
+	
 	<script src="js/controller/DinnerViewController.js"></script>
 	<script src="js/controller/HeadbarViewController.js"></script>
 	<script src="js/controller/DishsearchViewController.js"></script>

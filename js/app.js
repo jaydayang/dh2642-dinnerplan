@@ -10,7 +10,7 @@ $(function() {
 	var dishitemView = new DishitemView($("#dishitemView"), model);
 	var dinnerView = new DinnerView($("#dinnerView"),model);
 	
-    var ingredientList = new IngredientList($("#ingredientList"),model);
+    
     var printOut = new PrintOut($("#printOut"),model);
 	var detailView = new DetailView($("#detailView"),model);
 	var headbarView = new HeadbarView($("#headbarView"),model);
@@ -21,7 +21,7 @@ $(function() {
 	var welcomeViewController = new WelcomeViewController(welcomeView, model,this);
 	var sidebarViewController = new SidebarViewController(sidebarView, model,this);
 	
-	var ingredientViewController = new IngredientViewController(ingredientList, model,this);
+	
 	var dinnerViewController = new DinnerViewController(dinnerView, model,this);
 	var headbarViewController = new HeadbarViewController(headbarView, model,this);
 	var dishsearchViewController = new DishsearchViewController(dishsearchView,model,this);
@@ -50,7 +50,7 @@ $(function() {
 		$('#dishitemView').hide();
 		$('#dishsearchView').hide();
 		$('#headbarView').hide();
-		$('#ingredientList').hide();
+
 		$('#printOut').hide();
 		$('#sidebarView').hide();
 		$('#welcomeView').hide();
@@ -77,7 +77,7 @@ $(function() {
 			case "DetailView":
 			$('#sidebarView').show();
 			$("#detailView").show();
- 	        $("#ingredientList").show();
+ 	       
 		}
 	}
 

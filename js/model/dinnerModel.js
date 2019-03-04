@@ -31,7 +31,7 @@ var DinnerModel = function() {
 
     	for(var i=0; i<observers.length; i++){
     		/* update  observers array*/
-			observers[i].update();
+			observers[i].update(changeDetails);
 			
 			
     	}     
@@ -50,7 +50,7 @@ var DinnerModel = function() {
 		console.log(guestnumbers);
 		//this.addObserver(guestnumbers);
 		//this.removeObserver(guestnumbers);
-		this.notifyObservers();
+		this.notifyObservers("guestChanged");
 	
 	}
 	
@@ -64,20 +64,13 @@ var DinnerModel = function() {
 	}
 
 	//Returns the dish that is on the menu for selected type 
-	this.getSelectedDish = function(type,filter) {
+	this.getSelectedDish = function() {
 		//TODO Lab 1
 		//var selecteddish = new Array();
 		//var typ="dessert";
 		//console.log("typeeeeesda"+type);
-		this.getAllDishes(type,filter).then(dish =>{
-			
-			this.selecteddish = dish;
 		
-		
-		console.log("selected");
-		console.log(this.selecteddish);
-		});
-		this.notifyObservers();
+		this.notifyObservers("searchChanged");
 		return this.selecteddish;
 		
 		
@@ -94,7 +87,8 @@ var DinnerModel = function() {
 	
 	this.getFullMenu = function() {
 		
-  		return menu;
+		  return menu;
+		  
  }
 
 	//Returns all ingredients for all the dishes on the menu.
@@ -102,10 +96,12 @@ var DinnerModel = function() {
 		//TODO Lab 1
 		var allingredients = new Array();
 		this.getFullMenu().forEach(function(value,index,array){
+			value.extendedIngredients.forEach(function(ingredient){
+				allingredients.push(ingredient);
+			})
 			
-			allingredients.push(value.extendedIngredients);
 		})
-
+        console.log(allingredients);
 		return allingredients;
 		
 	
@@ -113,7 +109,8 @@ var DinnerModel = function() {
 	
 	this.getEachMenuPrice = function(index){
 		var price0 = 0;
-		this.getAllIngredients()[index].forEach(function(value, index, array){
+		var dish = this.getFullMenu()[index];
+		dish.extendedIngredients.forEach(function(){
 			price0 += 1;						 
 		})
 		return price0;
@@ -126,7 +123,7 @@ var DinnerModel = function() {
 		
 		var price2 = 0;
 		this.getAllIngredients().forEach(function(value, index, array){
-			var price1 = 0;
+			
 			//value.forEach(function(value, index, array){
 				//price1 += 1;
 			    //console.log(value.price);
@@ -151,18 +148,18 @@ var DinnerModel = function() {
 
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
 	//it is removed from the menu and the new one added.
-	this.addDishToMenu = function(id) {
+	this.addDishToMenu = function(dish) {
 		//TODO Lab 1
-		var dish = this.getDish(id);
+		//var dish = this.getDish(id);
 		
 		menu.push(dish);
 		console.log("add");
-		this.notifyObservers();
+		this.notifyObservers("menuChanged");
 		
 	}
 
 	//Removes dish from menu
-	this.removeDishFromMenu = function(id) {
+	this.removeDishFromMenu = function() {
 		//TODO Lab 1
 		var dish = this.getDish(id);
 		var index = menu.indexOf(dish);
@@ -198,19 +195,28 @@ var DinnerModel = function() {
  	//.then(dish => dish.results);
  }
 
- this.setDish = function(id){
-    this.getDish(id);;
-    this.notifyObservers();
- }
+
+ 
  this.setTargetId = function(id){
  	//this.targetId
  	this.targetId=id;
  	console.log("herterteterterterte"+this.targetId);
+	 this.notifyObservers("idChanged");
+
  
 
- 	//notifyObservers();
-
  }
+ this.getTargetId = function(){
+	//this.targetId
+	return this.targetId;
+
+	notifyObservers();
+
+}
+
+  
+
+
 
 
 	// the dishes variable contains an array of all the 

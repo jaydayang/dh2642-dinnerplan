@@ -7,7 +7,8 @@ var DishsearchViewController = function (view, model,app){
 		
 		//console.log("typeeoooooiiioioee"+view.type);
 		//console.log("text"+view.text);
-		model.getSelectedDish(this.type,this.text);
+		
+		model.getSelectedDish();
 		
 		
 	})
@@ -15,7 +16,7 @@ var DishsearchViewController = function (view, model,app){
 	view.dishdisplay.on('click', '.meal', function(event){
  	   var id = $(this).attr('id'); 
  	   model.setTargetId(id);
- 	   model.setDish(id);
+ 	  // model.setDish(id);
  	   console.log(model.targetId+"model.targetId");
  	   view.hide();
  	   app.jumpTo("DetailView");
