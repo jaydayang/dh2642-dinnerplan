@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dinner planner</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Asap:400,500,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600" rel="stylesheet">
+
+  </head>
+  <body>
+	<div class="container">
+		<div class="col-md-12 front">
+			<h1>Dinner Planner</h1>
+		</div>
+
+
+		<!---------------------------------Welcome View------------------------------------->
+		<div id = "welcomeView">
+		<div class="col-md-12 main">
+			
+			    <div class="col-md-12 col-sm-12 col-xs-12 ">
+				 <div class = "col-md-6 col-sm-8 col-xs-8 col-md-offset-3 col-sm-offset-2 col-xs-offset-2">
+					<span id="welcomeContext" ></span>
+				 </div>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+				 <div class = "col-md-6 col-sm-8 col-xs-8 col-md-offset-3 col-sm-offset-2 col-xs-offset-2">
+					<button  id="createNewPlanBtn" class="btn padding">Create New Plan</button>
+				 </div>
+				</div>
+			
+	    </div>
+		</div>
+
+
+
+	    <!------------------------------Sidebar View------------------------------------------->
+	    <div id="sidebarView" >
+	    <div  class="col-md-4 col-sm-6 col-xs-12">
+			
+			<nav class="navbar navbar-default">
+  			<div class="container-fluid">
+    		<!-- Brand and toggle get grouped for better mobile display -->
+    			<div class="navbar-header">
+      				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      					<span class="sr-only">Toggle navigation</span>
+       					<span class="icon-bar"></span>
+        				<span class="icon-bar"></span>
+        				<span class="icon-bar"></span>
+      				</button>
+     				<a class="navbar-brand h3" href="#">MyDinner</a>
+					<div class="navbar-toggle">SEK <span id="totalPrice"> </span></div>
+					<!--
+					<a class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collpase-1" aria-expanded="false">
+				
+					
+					</a>-->
+    			</div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      	<ul class="nav navbar-nav">
+		  <li class="wholetable2">
+				<table class="wholetable2">
+					<tr>
+						<td style="width:100px" >
+							<h5>People</h5>
+						</td>
+						<td class = "left">
+							<button id="minusGuestBtn" class="btn2" float=left><span class="glyphicon glyphicon-minus"></span></button>
+						
+						   
+							<span id="numberOfGuests" ></span>
+							
+						
+						
+							<button id="plusGuestBtn" class="btn2" float=right><span class="glyphicon glyphicon-plus"></span></button>
+						</td>
+
+					</tr>
+				</table>
+				
+				
+			</li>
+			<li class="wholetable2">
+			
+				<span id="orderlist"></span>
+				
+					<div class = "center">
+						<button id="confirmBtn" class="btn3">Confirm Dinner</button>
+					</div>
+									    	
+					
+
+			</li>
+      </ul>
+     
+      </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+		</div>
+		</div>	
+		
+			
+
+
+
+
+<!-----------------------------------------DishSearch View------------------------------------------------>
+		<div id="dishsearchView">
+			<div class="col-md-8 col-sm-6 col-xs-12">
+				<div>
+					<div><h3>FIND A DISH</h3></div>
+					<div>
+						<input id="selectText" type="text" placeholder="Search">
+						<select id="selectType" placeholder="All">
+						<option value="" selected>All</option>
+						<option value="starter">Starter</option>
+						<option value="main dish">Main Dish</option>
+						<option value="dessert">Dessert</option>
+						<option value="main course">Main Course</option>
+						<option value="side dish">Side Dish</option>
+						<option value="appetizer">Appetizer</option>
+						<option value="salad">Salad</option>
+						<option value="bread">Bread</option>
+						<option value="breakfast">Breakfast</option>
+						<option value="soup">Soup</option>
+						<option value="beverage">Beverage</option>
+						<option value="sauce">Sauce</option>
+						<option value="drink">Drink</option>
+						</select>
+						<button id="searchBtn" class="btn2" value="Search">Search</button>
+						
+					</div>
+				</div>
+				<span id="dishdisplay"></span>
+			</div>
+		</div>
+	
+
+	    
+	
+	  
+<!------------------------------------------Detail View----------------------------------------------->
+
+		<div class="col-md-8 col-sm-8 col-xs-12">
+		   
+				<div id = "detailView">
+					
+					<div id="detail" class="col-md-6 col-sm-6 col-xs-12">
+						<span id = "detail1"></span>
+						<div class="left"><button id="backBtn" class="btn2">back to search</button></div>
+						<span id = "detail2"></span>
+				    </div>
+			
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<row class="largen">
+				
+					<table class = "wholetable">
+				  
+						<tr id="guestnumber" class = "tablehead"></tr>
+						<tbody id="inlist"></tbody>
+						<tr>
+							<td colspan="2">
+								<button class="btn2" id="addToMenuBtn" >Add to Menu</button>
+							</td>
+							<td id="totalprice"></td> 
+						</tr>
+			
+					</table>
+					</row>
+				</div>
+			
+				
+			</div>
+		</div>
+	
+		</div>
+
+<!------------------------------------------------Headbar View--------------------------------------------->
+		<div id="headbarView" >
+			<div class="col-md-12 col-sm-12 col-xs-12">
+			
+				<nav class="navbar navbar-default">
+				  <div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="row">
+						 <div  class="col-md-6 col-sm-6 col-xs-6 h4 ">MyDinner: <span id="numberOfGuests"></span> people
+						 </div>
+						<div   class = "btnclass col-md-6 col-sm-6 col-xs-6">
+						<input id = "backBtn" type  = "button" value = "go back and edit dinner" class = "btn4 ">
+						</div>
+					
+					</div>
+				</div><!-- /.container-fluid -->
+				</nav>
+		
+			</div>
+		</div>
+
+	<!------------------------------------------Dinner View-------------------------------------------------->
+
+	<div id="dinnerView" >
+  		<div id="dinneroverview"></div>
+  		<div class="col-md-12 col-sm-12 col-xs-12">
+  		<div class="center">
+  			<button  id ="printOutBtn" class="btn5">Print Full Recipe</button>
+  		</div>
+ 		</div>
+   </div>
+
+
+	<!-------------------------------------------Print Out---------------------------------------------------->
+		<div id = "printOut" >	
+		
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			
+			
+			<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+			<div ><div id="printlist" ></div></div>
+			</div>
+		
+			
+			</div>
+		
+		</div>
+		</div>
+		
+	<!--------------------------------------------------------------------------------------------------------->	
+
+
+
+
+	
+		
+	</div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+	<div id="dishsearchView"></div>
+	<div id="sidebarView"></div>
+	<div id="dinnerModel"></div>
+	<script src="js/model/dinnerModel.js"></script>
+	<script src="js/view/dishsearchView.js"></script>
+	<script src="js/view/sidebarView.js"></script>
+	<script src="js/view/dishitemView.js"></script>
+	<script src="js/view/headbarView.js"></script>
+	<div id= "ingredientList"></div>
+
+
+	<script src="js/view/printOut.js"></script>
+	  
+	<!-- The application JavaScript code -->
+	<script src="js/app.js"></script>
+	<script src="js/model/dinnerModel.js"></script>
+	<script src="js/view/welcomeView.js"></script>
+	<script src="js/view/detailView.js"></script>
+    <div id = "detailView"></div>
+    <div id="dinnerView"></div>
+	<script src="js/view/dinnerView.js"></script>
+
+	<script src="js/controller/WelcomeViewController.js"></script>
+	<script src="js/controller/SidebarViewController.js"></script>
+	
+	<script src="js/controller/DinnerViewController.js"></script>
+	<script src="js/controller/HeadbarViewController.js"></script>
+	<script src="js/controller/DishsearchViewController.js"></script>
+	
+	<script src="js/controller/DetailViewController.js"></script>
+	
+	<!-- TODO: Here you should include JS code for your other views -->
+  </body>
+</html>
