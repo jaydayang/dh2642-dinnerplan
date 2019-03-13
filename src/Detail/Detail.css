@@ -1,0 +1,34 @@
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 18px;
+}
+h4 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 200;
+}
+.ingredientList {
+  width: 100%;
+}
+
+.center {
+  text-align: center;
+}
+.wholeTable {
+  width: 100%;
+  background-color: #ffe499;
+  border: 3px solid black;
+  padding-left: 20px;
+}
+.wholeTable h2 {
+  font-size: 18px;
+  padding: 20px;
+}
+.wholeTable td {
+  font-size: 14px;
+}
+.padding2 {
+  margin-top: 20px;
+}
